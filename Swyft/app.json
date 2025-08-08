@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Swyft",
+    "slug": "Swyft",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./src/assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1F1C2C"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#1F1C2C"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./src/assets/favicon.png"
+    }
+  }
+}
