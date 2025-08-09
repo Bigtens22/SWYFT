@@ -1,10 +1,11 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, DocumentData } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
+import { Role } from '../navigation/AuthNavigator';
 
 export interface AppUser extends User {
-    role?: 'Student' | 'Driver' | 'Delivery and Pick up' | 'Admin';
+    role?: Role;
     fullName?: string;
 }
 
@@ -22,30 +23,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // SPECIAL ADMIN CHECK
-        if (user.email === 'teniola4olamilekan2020@gmail.com') {
-          setUser({ ...user, role: 'Admin' });
-          setLoading(false);
-          return;
-        }
-
-        // User is signed in, get their custom data from Firestore
         const userDocRef = doc(db, 'users', user.uid);
         const userDoc = await getDoc(userDocRef);
         if (userDoc.exists()) {
           setUser({ ...user, ...userDoc.data() } as AppUser);
         } else {
-          // Should not happen in normal flow
           setUser(user);
         }
       } else {
-        // User is signed out
         setUser(null);
       }
       setLoading(false);
     });
 
-    return unsubscribe; // Unsubscribe on cleanup
+    return unsubscribe;
   }, []);
 
   return (

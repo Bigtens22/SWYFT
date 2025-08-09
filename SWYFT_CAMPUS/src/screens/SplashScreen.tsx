@@ -1,17 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import COLORS from '../constants/colors';
+import theme, { COLORS, FONTS } from '../../constants/theme';
 
 const SplashScreen = () => {
   return (
-    <LinearGradient
-      colors={[COLORS.primaryGradientStart, COLORS.primaryGradientEnd]}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <StatusBar barStyle="light-content" />
-      <Text style={styles.logo}>SWYFT</Text>
-    </LinearGradient>
+      <Text style={styles.title}>SWYFT CAMPUS</Text>
+    </View>
   );
 };
 
@@ -20,11 +16,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: COLORS.secondary,
   },
-  logo: {
-    fontSize: 48,
-    fontWeight: 'bold',
+  title: {
+    ...FONTS.h1,
     color: COLORS.white,
+    fontWeight: 'bold',
   },
 });
 
